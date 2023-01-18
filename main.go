@@ -74,7 +74,7 @@ func main() {
 			fmt.Println("Error: seed words passed is not 24 words.")
 			return
 		}
-		finalInput, err := Create(300, 5, []byte(seed), p, verbose)
+		finalInput, err := Create(43200, 5, []byte(seed), p, verbose)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -87,7 +87,7 @@ func main() {
 			fmt.Println("Error: seed words passed is not 24 words.")
 			return
 		}
-		finalInput, err := Recover(300, 5, []byte(seed), p, verbose)
+		finalInput, err := Recover(43200, 5, []byte(seed), p, verbose)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -113,6 +113,9 @@ func BuildHashchain(n int, input []byte, p *Argon2Params, verbose bool) ([]byte,
 			fmt.Println(hex.EncodeToString(hash))
 		}
 		input = hash
+		if i%1000 == 0 {
+			fmt.Println("i:", i)
+		}
 	}
 	elapsed := time.Since(start)
 	if verbose {
